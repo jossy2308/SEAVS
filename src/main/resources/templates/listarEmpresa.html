@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{plantillaPrincipal}">
+<head>
+<title>Lista Empresas</title>
+</head>
+<body>
+	<div layout:fragment="content">
+		<br>
+		<div class="card">
+			<div class="card-header">
+				<h3 class="card-title">Lista Empresas</h3>
+				<div class="card-tools">
+					<a type="button" class="btn btn-block btn-secondary"
+						th:href="@{/nuevaEmpresa}">Nuevo</a>
+				</div>
+			</div>
+			<div class="card-body">
+				<table id="example1" class="table table-bordered table-striped">
+					<thead>
+						<tr>
+							<th scope="col">Id Empresa</th>
+							<th scope="col">Nombre</th>
+							<th scope="col">RUC</th>
+							<th scope="col">Dirección</th>
+							<th scope="col">Email</th>
+							<th scope="col">Teléfono</th>
+							<th scope="col">Estado</th>
+							<th scope="col">Fecha Registro</th>
+							<th scope="col">Acciones</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="emp : ${empresas}">
+							<th scope="row" th:text="${emp.idEmpresa}"></th>
+							<td th:text="${emp.nombre}"></td>
+							<td th:text="${emp.ruc}"></td>
+							<td th:text="${emp.direccion}"></td>
+							<td th:text="${emp.email}"></td>
+							<td th:text="${emp.telefono}"></td>
+							<td th:text="${emp.estado ? 'Activo' : 'Inactivo'}"></td>
+							<td th:text="${#dates.format(emp.fechaRegistro, 'dd/MM/yyyy')}"></td>
+							<!--<td>
+								 <a type="button" class="btn btn-info btn-xs" th:href="@{/editarEmpresa/{id}(id=${emp.idEmpresa})}">
+									<i class="fas fa-edit"></i>
+								</a>
+								<a type="button" class="btn btn-danger btn-xs" th:href="@{/eliminarEmpresa/{id}(id=${emp.idEmpresa})}">
+									<i class="fas fa-trash-alt"></i>
+								</a>
+							</td>-->
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="card-footer">Footer</div>
+		</div>
+	</div>
+</body>
+</html>

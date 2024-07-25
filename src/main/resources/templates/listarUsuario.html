@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{plantillaPrincipal}">
+<head>
+<title>Lista de Usuarios</title>
+</head>
+<body>
+	<div layout:fragment="content">
+		<br>
+		<div class="card">
+			<div class="card-header">
+				<h3 class="card-title">Lista de Usuarios</h3>
+				<div class="card-tools">
+					<a type="button" class="btn btn-block btn-secondary"
+						th:href="@{/nuevoUsuario}">Nuevo</a>
+				</div>
+			</div>
+			<div class="card-body">
+				<table id="example1" class="table table-bordered table-striped">
+					<thead>
+						<tr>
+							<th scope="col">Id Usuario</th>
+							<th scope="col">Usuario</th>
+							<th scope="col">Email</th>
+							<th scope="col">Fecha Registro</th>
+							<th scope="col">Rol</th>
+							<th scope="col">Acciones</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="usuario : ${usuarios}">
+							<th scope="row" th:text="${usuario.idUsuario}"></th>
+							<td th:text="${usuario.usuario}"></td>
+							<td th:text="${usuario.email}"></td>
+							<td th:text="${#dates.format(usuario.fechaRegistro, 'dd/MM/yyyy')}"></td>
+							<td th:text="${usuario.fkRoles.nombre}"></td>
+							<!--<td>
+								<a type="button" class="btn btn-info btn-xs" th:href="@{/editarUsuario/{id}(id=${usuario.idUsuario})}">
+									<i class="fas fa-edit"></i>
+								</a>
+								<a type="button" class="btn btn-danger btn-xs" th:href="@{/eliminarUsuario/{id}(id=${usuario.idUsuario})}">
+									<i class="fas fa-trash-alt"></i>
+								</a>
+							</td>-->
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="card-footer">Footer</div>
+		</div>
+	</div>
+</body>
+</html>

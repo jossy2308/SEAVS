@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{plantillaPrincipal}">
+<head>
+<title>Lista de Permisos</title>
+</head>
+<body>
+	<div layout:fragment="content">
+		<br>
+		<div class="card">
+			<div class="card-header">
+				<h3 class="card-title">Lista de Permisos</h3>
+				<div class="card-tools">
+					<a type="button" class="btn btn-block btn-secondary"
+						th:href="@{/nuevoPermiso}">Nuevo</a>
+				</div>
+			</div>
+			<div class="card-body">
+				<table id="example1" class="table table-bordered table-striped">
+					<thead>
+						<tr>
+							<th scope="col">Id Permiso</th>
+							<th scope="col">Nombre</th>
+							<th scope="col">Descripcion</th>
+							<th scope="col">Acciones</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="permiso : ${permisos}">
+							<th scope="row" th:text="${permiso.idPermiso}"></th>
+							<td th:text="${permiso.nombre}"></td>
+							<td th:text="${permiso.descripcion}"></td>
+							<td th:text="${#dates.format(permiso.fechaRegistro, 'dd/MM/yyyy')}"></td>
+						<!--	<td>
+								 <a type="button" class="btn btn-info btn-xs" th:href="@{/editarPermiso/{id}(id=${permiso.idEstadoVehiculo})}">
+									<i class="fas fa-edit"></i>
+								</a>
+								<a type="button" class="btn btn-danger btn-xs" th:href="@{/eliminarPermiso/{id}(id=${permiso.idEstadoVehiculo})}">
+									<i class="fas fa-trash-alt"></i>
+								</a> 
+							</td>-->
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="card-footer">Footer</div>
+		</div>
+	</div>
+</body>
+</html>

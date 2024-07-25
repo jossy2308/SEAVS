@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{plantillaPrincipal}">
+<head>
+<meta charset="ISO-8859-1">
+<title>Nuevo Estado de Vehículo</title>
+</head>
+<body>
+	<div layout:fragment="content" class="container-fluid">
+		<br>
+		<div class="row">
+			<div class="col-12">
+				<div class="card card-secondary">
+					<div class="card-header">
+						<h3 class="card-title">Nuevo Estado de Vehículo</h3>
+					</div>
+					<form th:action="@{/guardarEstadoVehiculo}" th:object="${nuevo}" method="post">
+						<div class="card-body">
+							<div class="form-group">
+								<label for="estado">Estado:</label>
+								<input th:field="*{estado}" type="text" class="form-control" id="estado" placeholder="Estado">
+							</div>
+							
+							<button type="submit" class="btn btn-primary">Guardar</button>
+							<a type="button" class="btn btn-info" th:href="@{/estadosVehiculos}">Cancelar</a>
+							<input type="hidden" th:field="*{idEstadoVehiculo}">
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{plantillaPrincipal}">
+<head>
+<meta charset="ISO-8859-1">
+<title>Nuevo Vehículo Cliente</title>
+</head>
+<body>
+	<div layout:fragment="content" class="container-fluid">
+		<br>
+		<div class="row">
+			<div class="col-12">
+				<div class="card card-secondary">
+					<div class="card-header">
+						<h3 class="card-title">Nuevo Vehículo Cliente</h3>
+					</div>
+					<form th:action="@{/guardarVehiculoCliente}" th:object="${nuevo}" method="post">
+						<div class="card-body">
+							<div class="form-group">
+								<label for="cliente">Cliente:</label>
+								<select th:field="*{fkCliente}" class="form-control" id="cliente">
+									 <option th:each="cliente : ${clientes}" th:value="${cliente.idCliente}" th:text="${cliente.nombresCliente + ' ' + cliente.apellidosCliente}"></option>
+								</select>
+							</div>
+							<div class="form-group">
+								<label for="vehiculo">Vehículo:</label>
+								<select th:field="*{fkVehiculo}" class="form-control" id="vehiculo">
+									<option th:each="vehiculo : ${vehiculos}" th:value="${vehiculo.idVehiculo}" th:text="${vehiculo.placa}"></option>
+								</select>
+							</div>
+							
+							<button type="submit" class="btn btn-primary">Guardar</button>
+							<a type="button" class="btn btn-info" th:href="@{/vehiculosClientes}">Cancelar</a>
+							<input type="hidden" th:field="*{idVehiculoCliente}">
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

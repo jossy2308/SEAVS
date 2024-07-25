@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{plantillaPrincipal}">
+<head>
+    <title>Lista de Detalles de Vehículos</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <br>
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Lista de Detalles de Vehículos</h3>
+            <div class="card-tools">
+                <a type="button" class="btn btn-block btn-secondary" th:href="@{/nuevoVehiculoDetalle}">Nuevo</a>
+            </div>
+        </div>
+        <div class="card-body">
+            <table id="example1" class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                    <th scope="col">Fecha Registro</th>
+                    <th scope="col">Vehículo</th>
+                    <th scope="col">Acciones</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="vehiculoDetalle : ${vehiculosDetalles}">
+                    <td th:text="${#dates.format(vehiculoDetalle.fechaRegistro, 'dd/MM/yyyy')}"></td>
+                    <td th:text="${vehiculoDetalle.fkVehiculo.placa}"></td>
+                    <td>
+                        <a type="button" class="btn btn-info btn-xs" th:href="@{/verDetalleVehiculo/{id}(id=${vehiculoDetalle.idVehDetalle})}">
+                            Ver Detalles
+                        </a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="card-footer">Footer</div>
+    </div>
+</div>
+</body>
+</html>

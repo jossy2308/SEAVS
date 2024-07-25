@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{plantillaPrincipal}">
+<head>
+<meta charset="ISO-8859-1">
+<title>Nueva Empresa</title>
+</head>
+<body>
+	<div layout:fragment="content" class="container-fluid">
+		<br>
+		<div class="row">
+			<div class="col-12">
+				<div class="card card-secondary">
+					<div class="card-header">
+						<h3 class="card-title">Nueva Empresa</h3>
+					</div>
+					<form th:action="@{/guardarEmpresa}" th:object="${nueva}" method="post">
+						<div class="card-body">
+							<div class="form-group">
+								<label for="nombre">Nombre:</label>
+								<input th:field="*{nombre}" type="text" class="form-control" id="nombre" placeholder="Nombre">
+							</div>
+							<div class="form-group">
+								<label for="ruc">RUC:</label>
+								<input th:field="*{ruc}" type="text" class="form-control" id="ruc" placeholder="RUC">
+							</div>
+							<div class="form-group">
+								<label for="direccion">Dirección:</label>
+								<input th:field="*{direccion}" type="text" class="form-control" id="direccion" placeholder="Dirección">
+							</div>
+							<div class="form-group">
+								<label for="email">Email:</label>
+								<input th:field="*{email}" type="email" class="form-control" id="email" placeholder="correo@ejemplo.com">
+							</div>
+							<div class="form-group">
+								<label for="telefono">Teléfono:</label>
+								<input th:field="*{telefono}" type="text" class="form-control" id="telefono" placeholder="09xxxxxxxx">
+							</div>
+							<div class="form-group">
+									<label for="estado">Estado:</label>
+									<select th:field="*{estado}" class="form-control" id="estado">
+										<option value="true">Activo</option>
+										<option value="false">Inactivo</option>
+									</select>
+								</div>
+							
+							<button type="submit" class="btn btn-primary">Guardar</button>
+							<a type="button" class="btn btn-info" th:href="@{/empresas}">Cancelar</a>
+							<input type="hidden" th:field="*{idEmpresa}">
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{plantillaPrincipal}">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Nuevo Precio de Vehículo</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <div layout:fragment="content" class="container-fluid">
+        <br>
+        <div class="row">
+            <div class="col-12">
+                <div class="card card-secondary">
+                    <div class="card-header">
+                        <h3 class="card-title">Nuevo Precio de Vehículo</h3>
+                    </div>
+                    <form th:action="@{/guardarVehiculoPrecio}" th:object="${nuevo}" method="post">
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="vehiculo">Vehículo:</label>
+                                <select th:field="*{fkVehiculo}" class="form-control" id="vehiculo">
+                                    <option value="">Seleccione un vehículo</option>
+                                    <option th:each="vehiculo : ${vehiculos}" th:value="${vehiculo.idVehiculo}" th:text="${vehiculo.placa}"></option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="kilometraje">Kilometraje:</label>
+                                <input type="number" class="form-control" id="kilometraje" placeholder="Kilometraje" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="precioVehiculo">Precio Vehículo:</label>
+                                <input th:field="*{precioVehiculo}" type="number" step="0.01" class="form-control" id="precioVehiculo" placeholder="Precio Vehículo">
+                            </div>
+                            <div class="form-group">
+                                <label for="depreciacion">Depreciación:</label>
+                                <input th:field="*{depreciacion}" type="number" min="5" max="10" class="form-control" id="depreciacion" placeholder="Depreciación">
+                            </div>
+                            <div class="form-group">
+                                <label for="iva">IVA:</label>
+                                <input th:field="*{iva}" type="number" class="form-control" id="iva" value="15" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="anioVehiculo">Año del Vehículo:</label>
+                                <input th:field="*{anioVehiculo}" type="number" class="form-control" id="anioVehiculo" placeholder="Año del Vehículo" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="aede">AEDE:</label>
+                                <input th:field="*{aede}" type="number" step="0.01" class="form-control" id="aede" placeholder="AEDE">
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="valorMecanico">Valor Mecánico:</label>
+                                    <input th:field="*{valorMecanico}" type="number" step="0.01" class="form-control" id="valorMecanico" placeholder="Valor Mecánico">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="valorSistema">Valor Sistema:</label>
+                                    <input th:field="*{valorSistema}" type="number" step="0.01" class="form-control" id="valorSistema" placeholder="Valor Sistema">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="oferta">Oferta:</label>
+                                <input th:field="*{oferta}" type="number" step="0.01" class="form-control" id="oferta" placeholder="Oferta">
+                            </div>
+                            
+                            <button type="submit" class="btn btn-primary">Guardar</button>
+                            <a type="button" class="btn btn-info" th:href="@{/vehiculosPrecios}">Cancelar</a>
+                            <input type="hidden" th:field="*{idVehPrecio}">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

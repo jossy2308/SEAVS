@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{plantillaPrincipal}">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Nuevo Detalle de Vehículo</title>
+    <script>
+        function toggleValor(selectElement, id) {
+            var valorInput = document.getElementById('valor_' + id);
+            if (valorInput) {
+                var isDisabled = (selectElement.value === 'true');
+                valorInput.disabled = isDisabled;
+                if (isDisabled) {
+                    valorInput.value = '';
+                }
+                actualizarSumaTotal();
+            }
+        }
+
+        function actualizarSumaTotal() {
+            var inputs = document.querySelectorAll('input[id^="valor_"]');
+            var suma = 0;
+            inputs.forEach(function(input) {
+                if (!input.disabled && input.value) {
+                    suma += parseFloat(input.value) || 0;
+                }
+            });
+            document.getElementById('sumaTotal').value = suma.toFixed(2);
+        }
+    </script>
+</head>
+<body>
+<div layout:fragment="content" class="container-fluid">
+    <br>
+    <div class="row">
+        <div class="col-12">
+            <div class="card card-secondary">
+                <div class="card-header">
+                    <h3 class="card-title">Nuevo Detalle de Vehículo</h3>
+                </div>
+                <form th:action="@{/guardarVehiculoDetalle}" th:object="${nuevo}" method="post">
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label for="vehiculo">Vehículo:</label>
+                            <select th:field="*{fkVehiculo}" class="form-control" id="vehiculo">
+                                <option th:each="vehiculo : ${vehiculos}" th:value="${vehiculo.idVehiculo}"
+                                        th:text="${vehiculo.placa}"></option>
+                            </select>
+                        </div>
+                        <div th:each="detalle, iterStat : ${detalles}">
+                            <div class="form-group row">
+                                <label th:for="${'estado_' + detalle.idDetalle}" class="col-sm-2 col-form-label"
+                                       th:text="${detalle.nombre}"></label>
+                                <div class="col-sm-4">
+                                    <select th:field="*{estado}" class="form-control"
+                                            id="${'estado_' + detalle.idDetalle}"
+                                            th:onchange="toggleValor(this, ${detalle.idDetalle})">
+                                        <option value="true">Aprobado</option>
+                                        <option value="false">Rechazado</option>
+                                    </select>
+                                </div>
+                                <div class="col-sm-6">
+                                    <input type="text" th:field="*{valor}" class="form-control"
+                                           id="${'valor_' + detalle.idDetalle}" placeholder="Valor"
+                                           th:disabled="*{estado} == true" oninput="actualizarSumaTotal()"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Suma Total:</label>
+                            <div class="col-sm-4">
+                                <input type="text" id="sumaTotal" class="form-control" value="0.00" readonly>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                        <a type="button" class="btn btn-info" th:href="@{/vehiculosDetalles}">Cancelar</a>
+                        <input type="hidden" th:field="*{idVehDetalle}">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

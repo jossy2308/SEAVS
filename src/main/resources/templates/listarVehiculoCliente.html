@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{plantillaPrincipal}">
+<head>
+<title>Lista de Vehículo Cliente</title>
+</head>
+<body>
+	<div layout:fragment="content">
+		<br>
+		<div class="card">
+			<div class="card-header">
+				<h3 class="card-title">Lista de Vehículo Cliente</h3>
+				<div class="card-tools">
+					<a type="button" class="btn btn-block btn-secondary"
+						th:href="@{/nuevoVehiculoCliente}">Nuevo</a>
+				</div>
+			</div>
+			<div class="card-body">
+				<table id="example1" class="table table-bordered table-striped">
+					<thead>
+						<tr>
+							<th scope="col">Id Vehículo Cliente</th>
+							<th scope="col">Cliente</th>
+							<th scope="col">Vehículo</th>
+							
+							<th scope="col">Acciones</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="vehiculoCliente : ${vehiculosClientes}">
+							<th scope="row" th:text="${vehiculoCliente.idVehiculoCliente}"></th>
+							<td th:text="${vehiculoCliente.fkCliente.nombresCliente + ' ' + vehiculoCliente.fkCliente.apellidosCliente}"></td>
+							<td th:text="${vehiculoCliente.fkVehiculo.placa}"></td>
+							<!--<td>
+								<a type="button" class="btn btn-info btn-xs" th:href="@{/editarVehiculoCliente/{id}(id=${vehiculoCliente.idVehiculoCliente})}">
+									<i class="fas fa-edit"></i>
+								</a>
+								<a type="button" class="btn btn-danger btn-xs" th:href="@{/eliminarVehiculoCliente/{id}(id=${vehiculoCliente.idVehiculoCliente})}">
+									<i class="fas fa-trash-alt"></i>
+								</a>
+							</td>-->
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="card-footer">Footer</div>
+		</div>
+	</div>
+</body>
+</html>

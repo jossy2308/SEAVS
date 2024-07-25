@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{plantillaPrincipal}">
+<head>
+<title>Lista Estados de Vehículos</title>
+</head>
+<body>
+	<div layout:fragment="content">
+		<br>
+		<div class="card">
+			<div class="card-header">
+				<h3 class="card-title">Lista Estados de Vehículos</h3>
+				<div class="card-tools">
+					<a type="button" class="btn btn-block btn-secondary"
+						th:href="@{/nuevoEstadoVehiculo}">Nuevo</a>
+				</div>
+			</div>
+			<div class="card-body">
+				<table id="example1" class="table table-bordered table-striped">
+					<thead>
+						<tr>
+							<th scope="col">Id Estado Vehículo</th>
+							<th scope="col">Estado</th>
+							<th scope="col">Fecha Registro</th>
+							<th scope="col">Acciones</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="estadoVehiculo : ${estadosVehiculos}">
+							<th scope="row" th:text="${estadoVehiculo.idEstadoVehiculo}"></th>
+							<td th:text="${estadoVehiculo.estado}"></td>
+							<td th:text="${#dates.format(estadoVehiculo.fechaRegistro, 'dd/MM/yyyy')}"></td>
+							<!--<td>
+								<a type="button" class="btn btn-info btn-xs" th:href="@{/editarEstadoVehiculo/{id}(id=${estadoVehiculo.idEstadoVehiculo})}">
+									<i class="fas fa-edit"></i>
+								</a>
+								<a type="button" class="btn btn-danger btn-xs" th:href="@{/eliminarEstadoVehiculo/{id}(id=${estadoVehiculo.idEstadoVehiculo})}">
+									<i class="fas fa-trash-alt"></i>
+								</a>
+							</td> -->
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="card-footer">Footer</div>
+		</div>
+	</div>
+</body>
+</html>
